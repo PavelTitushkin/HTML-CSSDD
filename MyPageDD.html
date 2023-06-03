@@ -113,6 +113,34 @@
         font-size: medium;
         font-family: 'Courier New', Courier, monospace, Helvetica, sans-serif;
     }
+    #Copyright {
+        padding: 8px;
+        color: lightgray;
+        font-size: small;
+        font-family: 'Courier New', Courier, monospace, Helvetica, sans-serif;
+    }
+    .rate {
+        display: flex;
+        float: left;
+        margin: 8px;
+        padding: 8px;
+    }
+    #button-rate {
+        padding: 8px;
+        color: lightgray;
+        background-color: blueviolet;
+        font-size: medium;
+        font-family: 'Courier New', Courier, monospace, Helvetica, sans-serif;
+    }
+    #dollar-rate {
+        border: 2px solid lightgray;
+        border-radius: 5% 5% 5% 5%;
+        padding: 8px;
+        margin: 8px;
+        color: lightgray;
+        font-size: small;
+        font-family: 'Courier New', Courier, monospace, Helvetica, sans-serif;
+    }
   </style>
 </head>
 <body>
@@ -171,12 +199,38 @@
                     </div>
                     <button id="button-form" type="submit" >Отправить</button>
                 </div>
-                
             </form>
+        </div>
+        <div class="rate">
+            <button id="button-rate" onclick="getDollarRate()">Получить курс доллара</button>
+            <div id="dollar-rate">
+            </div>
         </div>
     </div>
 	<footer>
-
+        <p id="Copyright">Павел Титушкин &copy;</p>
     </footer>
 </body>
+
+<script>
+    function getDollarRate() {
+        var request = new XMLHttpRequest();
+        request.open('GET', 'https://www.cbr-xml-daily.ru/daily_json.js', true);
+        request.onload = function () {
+            if (request.status === 200) {
+                var response = JSON.parse(request.responseText);
+                var dollarRate = response.Valute.USD.Value;
+                var dollarRateElement = document.getElementById('dollar-rate');
+                dollarRateElement.innerText = 'Курс доллара: ' + dollarRate  + ' RUB';
+            }
+            else {
+                console.log('Произошла ошибка:', request.status);
+            }
+        };
+        request.onerror = function () {
+            console.log('Произошла ошибка при выполнении запроса');
+        };
+        request.send();
+    }
+</script>
 </html>
