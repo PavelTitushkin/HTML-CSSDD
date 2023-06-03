@@ -141,6 +141,13 @@
         font-size: small;
         font-family: 'Courier New', Courier, monospace, Helvetica, sans-serif;
     }
+    .react-form {
+        padding: 8px;
+        margin: 8px;
+        color: lightgray;
+        text-align: center;
+        font-family: 'Courier New', Courier, monospace, Helvetica, sans-serif;
+    }
   </style>
 </head>
 <body>
@@ -202,17 +209,38 @@
             </form>
         </div>
         <div class="rate">
-            <button id="button-rate" onclick="getDollarRate()">Получить курс доллара</button>
+            <button id="button-rate">Получить курс доллара</button>
             <div id="dollar-rate">
             </div>
         </div>
     </div>
+    <hr/>
+    <h2 class="react-form">Знакомство с React</h2>
+        <div id="root"></div>
 	<footer>
         <p id="Copyright">Павел Титушкин &copy;</p>
     </footer>
+
+    <script crossorigin src="https://unpkg.com/react@16/umd/react.production.min.js"></script>
+		<script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
+
+		<!-- Для компиляции JSX в JavaScript подключаем Babel-компилятор -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.25.0/babel.min.js"></script>
+		 
+		<!-- Элемент script должен иметь атрибут type="text/babel" -->
+		<script type="text/babel">
+
+			ReactDOM.render(
+				<h1>1. Привет изучающим React!</h1>,
+				document.getElementById("root")
+			)
+
+		</script>
 </body>
 
 <script>
+    document.getElementById("button-rate").addEventListener('click', getDollarRate);
+
     function getDollarRate() {
         var request = new XMLHttpRequest();
         request.open('GET', 'https://www.cbr-xml-daily.ru/daily_json.js', true);
