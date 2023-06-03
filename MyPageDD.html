@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <title>Почему С#</title>
+  <style>
+    body {
+        height: 100%;
+        width: 100%;
+        background: url(https://wallpapercave.com/wp/wp8591414.jpg);
+        background-repeat:no-repeat;
+        background-size: cover;
+    }
+    .grid-container {
+        display: grid;
+        grid-template-columns: 1fr 11fr;
+        padding: 8px;
+        border-radius: 5px;
+        font-size: 20px;
+        font-family: 'Courier New', Courier, monospace, Helvetica, sans-serif;
+    }
+    .item-1 {
+        grid-column-start: 1;
+        grid-column-end: 3;
+        color: lightgray;
+        text-align: center;
+        padding: 8px;
+    }
+    .item-2 {
+        grid-column-start: 1;
+        grid-column-end: 1;
+        text-align: center;
+        padding: 8px;
+    }
+    .item-3 {
+        grid-column-start: 2;
+        grid-column-end: 2;
+        color: lightgrey;
+        padding: 8px;
+    }    
+    .item-4 {
+        grid-column-start: 1;
+        grid-column-end: 3;
+        color: lightgrey;
+        border: 2px solid lightgray;
+        border-radius: 10% 10% 10% 10%;
+        border-color: lightgray;
+        padding: 8px;
+    }
+    .item-5 {
+        display: flex;
+        color: lightgrey;
+        padding: 8px;
+    }
+    .item-5-1 {
+        color: lightgrey;
+        padding: 8px;
+    }
+    .item-5-2 {
+        color: lightgrey;
+        padding: 8px;
+    }
+    .item-6 {
+        color: lightgrey;
+        padding: 8px;
+    }
+    .item-6-1 {
+        color: lightgrey;
+        padding: 8px;
+    }
+    .item-6-2 {
+        display: grid;
+        grid-template-columns: 2fr 9fr;
+        color: lightgrey;
+        padding: 8px;
+    }
+    #checkbox {
+        grid-column-start: 1;
+        grid-column-end: 2;
+        margin: 8px;
+    }
+    #lang-1, #lang-2, #lang-3, #lang-4 {
+        justify-content: right;
+    }
+    .item-7 {
+        display: grid;
+        color: lightgrey;
+        padding: 8px;
+    }
+    .item-7-1 {
+        grid-column-start: 1;
+        grid-column-end: 2;
+        color: lightgrey;
+        padding: 8px;
+    }
+    .item-7-2 {
+        grid-column-start: 2;
+        grid-column-end: 3;
+        color: lightgrey;
+        padding: 8px;
+    }
+    #select-age {
+        padding: 8px;
+        font-size: medium;
+        font-family: 'Courier New', Courier, monospace, Helvetica, sans-serif;
+    }
+    #button-form {
+        grid-column-start: 2;
+        grid-column-end: 3;
+        padding: 8px;
+        color: lightgray;
+        background-color: blueviolet;
+        font-size: medium;
+        font-family: 'Courier New', Courier, monospace, Helvetica, sans-serif;
+    }
+  </style>
+</head>
+<body>
+	<div class="grid-container">
+        <h1 class="item-1">Коротко о С#</h1>
+        <div class="item-2">
+            <a href="https://metanit.com/sharp/tutorial/" title="Учить C#" style="text-decoration: none;"><img src="https://c10.patreonusercontent.com/4/patreon-media/p/reward/5206245/0fa46ae7aa264639adc51380ec070a22/eyJ3Ijo0MDB9/1.png?token-time=2145916800&token-hash=Okav0xawQPJT3JtuuE3MPMxqR-BFFCZ9dopv0FYzRK0%3D"
+                height="125px" width="125px"/></a>
+        </div>
+        <div class="item-3">
+            <h3>Что такое C #?</h3>
+            C#, также известный как C-Sharp, представляет собой типобезопасный язык программирования общего назначения, который следует конструкциям C и C ++. Он следует нескольким парадигмам программирования, включая объектно-ориентированное, структурированное, императивное, управляемое задачами, функциональное, управляемое событиями, параллельное, рефлексивное и общее. Андерс Хельсберг из Microsoft разработал C# в 2001 году. Позже Европейская ассоциация производителей компьютеров (ECMA) утвердила его в качестве международного стандарта в 2002 году. Более того, Международная организация по стандартизации (ISO) одобрила его в 2003 году. C# синтаксически аналогичен Java, и его легко освоить тем, кто хорошо знает C и C ++. Как и Java, C# также является нейтральным или независимым от платформы языком, код которого может быть скомпилирован и запущен во всех операционных системах. Он обычно используется с платформой Microsoft .NET для Windows.
+            Хочешь начать изучать C# жми <a href="https://metanit.com/sharp/tutorial/" title="Учить C#" style="text-decoration: none; color: rgb(175, 111, 235);"><b>сюда</b></a>.
+        </div>
+        <div class="item-4">
+            <form action="http://foo.com" method="post">
+                <div class="item-5">
+                    <div class="item-5-1">1. Понравилась вам статья?</div>
+                    <div class="item-5-2">
+                        <label for="radio-yes">ДА</label>
+                        <input type="radio" id="radio-yes" name="survey" value="ДА" checked/>
+                        <label for="radio-no">НЕТ</label>
+                        <input type="radio" id="radio-no" name="survey" value="НЕТ"/>
+                    </div>
+                </div>
+                <div class="item-6">
+                    <div class="item-6-1">2. Какие ваши любимые языки программирования?</div>
+                    <div class="item-6-2">
+                            <label for="lang-1">C/C++</label>
+                            <input type="checkbox" id="lang-1" name="lang-1" value="C/C++"/>
+                            <label for="lang-2">C#</label>
+                            <input type="checkbox" id="lang-2" name="lang-2" value="C#" checked/>
+                            <label for="lang-3">JAVA</label>
+                            <input type="checkbox" id="lang-3" name="lang-3" value="JAVA"/>
+                            <label for="lang-4">Php</label>
+                            <input type="checkbox" id="lang-4" name="lang-4" value="Php"/>
+                            <label for="lang-5">JavaScript</label>
+                            <input type="checkbox" id="lang-5" name="lang-5" value="JavaScript"/>
+                            <label for="lang-6">Phyton</label>
+                            <input type="checkbox" id="lang-6" name="lang-6" value="Phyton"/>
+                    </div>
+                </div>
+                <div class="item-7">
+                    <div class="item-7-1">
+                        <label for="select-age">3. Укажите ваш возраст</label>
+                    </div>
+                    <div class="item-7-2">
+                        <select id="select-age" name="age"> 
+                            <option value="">Выберите возраст</option>
+                            <option value="младше 18">младше 18</option> 
+                            <option value="18-25">18-25</option> 
+                            <option value="26-35">26-35</option> 
+                            <option value="36-45">36-45</option>
+                            <option value="старше 45">старше 45</option> 
+                          </select>
+                    </div>
+                    <button id="button-form" type="submit" >Отправить</button>
+                </div>
+                
+            </form>
+        </div>
+    </div>
+	<footer>
+
+    </footer>
+</body>
+</html>
