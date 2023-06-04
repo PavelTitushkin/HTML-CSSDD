@@ -222,25 +222,114 @@
     </footer>
 
     <script crossorigin src="https://unpkg.com/react@16/umd/react.production.min.js"></script>
-		<script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
-
-		<!-- Для компиляции JSX в JavaScript подключаем Babel-компилятор -->
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.25.0/babel.min.js"></script>
+	<script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.25.0/babel.min.js"></script>
 		 
-		<!-- Элемент script должен иметь атрибут type="text/babel" -->
-		<script type="text/babel">
+    <script type="text/babel">
 
-			ReactDOM.render(
-				<h1>1. Привет изучающим React!</h1>,
-				document.getElementById("root")
-			)
+        class FormReact extends React.Component {
+            constructor(props) {
+                super(props);
+                this.state = {
+                    radioChange: '',
+                    checkboxLangChange: [],
+                    selectAge: ''
+                };
 
-		</script>
+                this.handleRadioChange = this.handleRadioChange.bind(this);
+                this.handleCheckboxChange = this.handleCheckboxChange.bind(this);
+                this.handleSelectAgeChange = this.handleSelectAgeChange.bind(this);
+            }
+
+            handleSubmit(event){
+                alert('Понравилась вам статья: ' + this.state.radioChange + '\n' +
+                        'Ваши любимые языки программирования: ' + this.state.selectAgeData + '\n' +
+                        'Ваш возраст: ' + this.state.selectAge);
+                event.preventDefault;
+            }
+
+            handleRadioChange = (event) => {
+                this.setState({radioChange: event.target.value});
+            }
+
+            handleCheckboxChange = (event) => {
+                this.setState({checkboxLangChange: event.target.value});
+            }
+
+            handleSelectAgeChange = (event) => {
+                this.setState({selectAge: event.target.value});
+            }
+
+            render() {
+                return (
+                    <div class="item-4">
+                        <form onSubmit={this.handleSubmit}>
+                            <div class="item-5">
+                                <div class="item-5-1">1. Понравилась вам статья?</div>
+                                {this.props.radioChange.map((option) => (
+                                    <div class="item-5-2">
+                                        <label for={option.id}>{option.value}</label>
+                                        <input type="radio" key={option.id} value={option.value} name="radio" onChange={this.handleRadioChange} checked/>    
+                                    </div>
+                                ))}
+                            </div>
+                            <div class="item-6">
+                                <div class="item-6-1">2. Какие ваши любимые языки программирования?</div>
+                                {this.props.checkboxLangChange.map((option) => (
+                                    <div class="item-6-2">
+                                        <label for={option.id}>{option.value}</label>
+                                        <input type="checkbox" key={option.id} value={option.value} name="checkbox" id={option.id} onChange={this.handleCheckboxChange}/>    
+                                    </div>
+                                ))}
+                            </div>
+                            <div class="item-7">
+                                <div class="item-7-1">
+                                    <label for="select-age">3. Укажите ваш возраст</label>
+                                </div>
+                                <div class="item-7-2">
+                                    <select  id="select-age" name="age"  onChange={this.handleSelectAgeChange}>
+                                        {this.props.selectAgeData.map((option) => (
+                                            <option key={option.id} value={option.id}>{option.value}</option>
+                                            ))};
+                                    </select>
+                                </div>
+                                <button id="button-form" type="submit" >Отправить</button>
+                            </div>
+                        </form>
+                    </div>
+                );
+            }
+        }
+
+        const radioChange = [
+            { id: "1", value: "ДА" },
+            { id: "2", value: "НЕТ"}
+        ];
+
+        const checkboxLangChange = [
+            {id: "lang-1", value: "C/C++"},
+            {id: "lang-2", value: "C#"},
+            {id: "lang-3", value: "JAVA"},
+            {id: "lang-4", value: "Php"},
+            {id: "lang-5", value: "JavaScript"},
+            {id: "lang-6", value: "Phyton"},
+        ];
+
+        const selectAgeData = [
+            { id: "1", value: "младше 18" },
+            { id: "2", value: "18-25" },
+            { id: "3", value: "26-35" },
+            { id: "4", value: "36-45" },
+            { id: "5", value: "старше 45"}
+        ];
+
+        ReactDOM.render(<FormReact radioChange={radioChange} checkboxLangChange={checkboxLangChange} selectAgeData={selectAgeData}/>, 
+            document.getElementById("root"));
+    </script>
 </body>
 
 <script>
     document.getElementById("button-rate").addEventListener('click', getDollarRate);
-
     function getDollarRate() {
         var request = new XMLHttpRequest();
         request.open('GET', 'https://www.cbr-xml-daily.ru/daily_json.js', true);
