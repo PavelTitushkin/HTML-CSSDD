@@ -148,6 +148,15 @@
         text-align: center;
         font-family: 'Courier New', Courier, monospace, Helvetica, sans-serif;
     }
+    .root-form {
+        grid-column-start: 1;
+        grid-column-end: 3;
+        color: lightgrey;
+        border: 2px solid lightgray;
+        border-radius: 10% 10% 10% 10%;
+        border-color: lightgray;
+        padding: 8px;
+    }
   </style>
 </head>
 <body>
@@ -242,18 +251,31 @@
             }
 
             handleSubmit(event){
-                alert('Понравилась вам статья: ' + this.state.radioChange + '\n' +
-                        'Ваши любимые языки программирования: ' + this.state.selectAgeData + '\n' +
-                        'Ваш возраст: ' + this.state.selectAge);
-                event.preventDefault;
+                event.preventDefault;         
+                alert(`Понравилась вам статья: ${this.state.radioChange}\n
+                        Ваши любимые языки программирования: ${this.state.checkboxLangChange.join(', ')}\n
+                        Ваш возраст: ${this.state.selectAge}`);
             }
 
             handleRadioChange = (event) => {
-                this.setState({radioChange: event.target.value});
+                this.setState({radioChange:  event.target.value});
             }
 
             handleCheckboxChange = (event) => {
-                this.setState({checkboxLangChange: event.target.value});
+                const checkboxId = event.target.id;
+                const isChecked = event.target.checked;
+
+                this.setState((prevState) => {
+                    if(isChecked) {
+                        return {
+                            checkboxLangChange: [ ...prevState.checkboxLangChange, checkboxId]
+                        };
+                    } else {
+                        return {
+                            checkboxLangChange: prevState.checkboxLangChange.filter((id) => id !== checkboxId)
+                        };
+                    }
+                });
             }
 
             handleSelectAgeChange = (event) => {
@@ -262,48 +284,50 @@
 
             render() {
                 return (
-                    <div class="item-4">
-                        <form onSubmit={this.handleSubmit}>
-                            <div class="item-5">
-                                <div class="item-5-1">1. Понравилась вам статья?</div>
-                                {this.props.radioChange.map((option) => (
+                        <div>
+                            <form onSubmit={this.handleSubmit}>
+                            <div class="item-5-1">1. Понравилась вам статья?</div>
+                                {radioChange.map((option) => (
                                     <div class="item-5-2">
-                                        <label for={option.id}>{option.value}</label>
-                                        <input type="radio" key={option.id} value={option.value} name="radio" onChange={this.handleRadioChange} checked/>    
+                                        <label htmlFor={option.id}>{option.value}</label>
+                                        <input type="radio"
+                                            id={option.id}
+                                            name={option.id}
+                                            checked={this.state[option.id]}
+                                            onChange={this.handleRadioChange}/>    
                                     </div>
                                 ))}
-                            </div>
                             <div class="item-6">
                                 <div class="item-6-1">2. Какие ваши любимые языки программирования?</div>
-                                {this.props.checkboxLangChange.map((option) => (
+                                {checkboxLangChange.map((option) => (
                                     <div class="item-6-2">
-                                        <label for={option.id}>{option.value}</label>
-                                        <input type="checkbox" key={option.id} value={option.value} name="checkbox" id={option.id} onChange={this.handleCheckboxChange}/>    
+                                        <label htmlFor={option.id}>{option.value}</label>
+                                        <input type="checkbox"
+                                            id={option.id}
+                                            name={option.id}
+                                            checked={this.state[option.id]}
+                                            onChange={this.handleCheckboxChange}/>    
                                     </div>
-                                ))}
+                                ))}                           
                             </div>
-                            <div class="item-7">
-                                <div class="item-7-1">
-                                    <label for="select-age">3. Укажите ваш возраст</label>
-                                </div>
                                 <div class="item-7-2">
-                                    <select  id="select-age" name="age"  onChange={this.handleSelectAgeChange}>
+                                    <label for="select-age">3. Укажите ваш возраст</label>
+                                    <select  id="select-age" value={this.state.value} onChange={this.handleSelectAgeChange}>
                                         {this.props.selectAgeData.map((option) => (
-                                            <option key={option.id} value={option.id}>{option.value}</option>
+                                            <option key={option.id} value={option.value}>{option.value}</option>
                                             ))};
                                     </select>
                                 </div>
                                 <button id="button-form" type="submit" >Отправить</button>
-                            </div>
                         </form>
-                    </div>
+                     </div>    
                 );
             }
         }
 
         const radioChange = [
-            { id: "1", value: "ДА" },
-            { id: "2", value: "НЕТ"}
+            { id: "Yes", value: "ДА" },
+            { id: "no", value: "НЕТ"}
         ];
 
         const checkboxLangChange = [
